@@ -1,0 +1,4 @@
+# Bỏ qua file bytecode Python
+*.pyc
+__pycache__/
+.env
