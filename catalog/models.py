@@ -89,18 +89,18 @@ class BookInstance(models.Model):
         blank=True
     )
 
-    LOAN_STATUS = (
-        ('m', 'Maintenance'),
-        ('o', 'On loan'),
-        ('a', 'Available'),
-        ('r', 'Reserved'),
-    )
+    #Thêm enum
+    class LoanStatus(models.TextChoices):
+        MAINTENANCE = 'm', 'Maintenance'
+        ON_LOAN = 'o', 'On loan'
+        AVAILABLE = 'a', 'Available'
+        RESERVED = 'r', 'Reserved'
 
     status = models.CharField(
         max_length=STATUS_MAX_LENGTH,
-        choices=LOAN_STATUS,
+        choices=LoanStatus.choices,
         blank=True,
-        default='m',
+        default=LoanStatus.MAINTENANCE,
         help_text='Book availability'
     )
 
