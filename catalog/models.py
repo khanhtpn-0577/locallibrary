@@ -1,6 +1,6 @@
 from django.db import models
-from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
-import uuid  # Required for unique book instances
+from django.urls import reverse
+import uuid
 from .constants import (
     TITLE_MAX_LENGTH,
     SUMMARY_MAX_LENGTH,
@@ -14,16 +14,15 @@ from .constants import (
 
 class Genre(models.Model):
     """Model representing a book genre."""
-    
+
     name = models.CharField(
         max_length=GENRE_NAME_MAX_LENGTH,
         help_text='Enter a book genre (e.g. Science Fiction)'
     )
-    
+
     def __str__(self):
         """String for representing the Model object."""
         return self.name
-
 
 
 class Book(models.Model):
@@ -46,7 +45,11 @@ class Book(models.Model):
         'ISBN',
         max_length=ISBN_MAX_LENGTH,
         unique=True,
-        help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn">ISBN number</a>'
+        help_text=(
+            '13 Character '
+            '<a href="https://www.isbn-international.org/content/what-isbn">'
+            'ISBN number</a>'
+        )
     )
 
     genre = models.ManyToManyField(
@@ -61,15 +64,22 @@ class Book(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a detail record for this book."""
         return reverse('book-detail', args=[str(self.id)])
+
     def display_genre(self):
-        """Create a string for the Genre. This is required to display genre in Admin."""
+        """
+        Create a string for the Genre.
+        This is required to display genre in Admin.
+        """
         return ', '.join(genre.name for genre in self.genre.all()[:3])
 
     display_genre.short_description = 'Genre'
 
 
 class BookInstance(models.Model):
-    """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
+    """
+    Model representing a specific copy of a book
+    (i.e. that can be borrowed from the library).
+    """
 
     id = models.UUIDField(
         primary_key=True,
@@ -89,7 +99,6 @@ class BookInstance(models.Model):
         blank=True
     )
 
-    #Thêm enum
     class LoanStatus(models.TextChoices):
         MAINTENANCE = 'm', 'Maintenance'
         ON_LOAN = 'o', 'On loan'
