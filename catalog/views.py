@@ -18,6 +18,7 @@ BOOK_LIST_CONTEXT_NAME = 'book_list'
 BOOK_LIST_TEMPLATE = 'catalog/book_list.html'
 BOOK_LIST_PAGINATE_BY = 10
 DEFAULT_DATE_OF_DEATH = date(2020, 6, 11)
+AUTHOR_LIST_PAGINATE_BY = 10
 
 
 @login_required
@@ -147,4 +148,13 @@ class AuthorUpdate(UpdateView):
 class AuthorDelete(DeleteView):
     model = Author
     success_url = reverse_lazy('authors')
+
+class AuthorListView(generic.ListView):
+    model = Author
+    paginate_by = AUTHOR_LIST_PAGINATE_BY
+
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
 

@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+{% load i18n %}
+
+{% block content %}
+  <h1>{% trans "Author Detail" %}</h1>
+
+  <p><strong>{% trans "Name" %}:</strong> {{ author.first_name }} {{ author.last_name }}</p>
+
+  {% if author.date_of_birth %}
+    <p><strong>{% trans "Date of birth" %}:</strong> {{ author.date_of_birth }}</p>
+  {% endif %}
+
+  {% if author.date_of_death %}
+    <p><strong>{% trans "Date of death" %}:</strong> {{ author.date_of_death }}</p>
+  {% endif %}
+
+  <a href="{% url 'author-update' author.pk %}" class="btn btn-primary">{% trans "Edit" %}</a>
+  <a href="{% url 'author-delete' author.pk %}" class="btn btn-danger">{% trans "Delete" %}</a>
+{% endblock %}
