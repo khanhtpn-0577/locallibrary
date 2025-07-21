@@ -13,3 +13,4 @@ wheel==0.45.1
 whitenoise==6.9.0
 psycopg>=3
 gunicorn
+Django>=4.2,<5.0
