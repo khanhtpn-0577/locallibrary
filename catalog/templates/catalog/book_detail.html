@@ -31,6 +31,13 @@
       {% endif %}
       <p><strong>{% trans "Imprint" %}:</strong> {{ copy.imprint }}</p>
       <p class="text-muted"><strong>{% trans "Id" %}:</strong> {{ copy.id }}</p>
+
+      {% if copy.status == STATUS_AVAILABLE and user.is_authenticated %}
+        <form action="{% url 'borrow-book' copy.id %}" method="post" style="margin-top: 10px;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary">{% trans "Borrow" %}</button>
+        </form>
+      {% endif %}
     {% endfor %}
   </div>
 {% endblock %}
