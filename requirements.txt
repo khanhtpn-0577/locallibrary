@@ -1,0 +1,15 @@
+asgiref==3.9.1
+dj-database-url==3.0.1
+Django==5.2.4
+git-filter-repo==2.47.0
+pep8==1.7.1
+pycodestyle==2.14.0
+python-decouple==3.8
+pytz==2025.2
+setuptools==78.1.1
+sqlparse==0.5.3
+tzdata==2025.2
+wheel==0.45.1
+whitenoise==6.9.0
+psycopg>=3
+gunicorn
